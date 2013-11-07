@@ -13,7 +13,7 @@ Output text in a framed box, with a title.
 Usage
 -----
 
-To get started:
+To get started `gem install box_puts`, then:
 
 	require 'box_puts'
 
