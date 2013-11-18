@@ -13,7 +13,7 @@ module TimeMethods
 		text
 	end
 
-	# convert time to non-relative human-readable format
+	# Converts time to non-relative human-readable format.
 	# @param t [Time] the time to convert
 	# @return [String] the time in human-readable format (Not words per-se).
 	def self.factual_time(t)
@@ -64,7 +64,7 @@ module TimeMethods
 
 	# Converts time into words with a Facebook like lingo ("just now", "an hour ago", etc...).
 	# @param start_time [Time] time to convert to words
-	# @return [String] time in words elapsed
+	# @return [String] time elapsed in words
 	def self.time_ago(start_time)
 		diff_seconds = Time.now.to_i - start_time.to_i
 		case diff_seconds
@@ -92,11 +92,19 @@ module TimeMethods
 	end
 
 end
-
+# Time is an abstraction of dates and times. Time is stored internally as the number of seconds with fraction since the Epoch, January 1, 1970 00:00 UTC. Also see the library module Date. The Time class treats GMT (Greenwich Mean Time) and UTC (Coordinated Universal Time) as equivalent. GMT is the older way of referring to these baseline times but persists in the names of calls on POSIX systems.
+#
+# All times may have fraction. Be aware of this fact when comparing times with each other – times that are apparently equal when displayed may be different when compared.
+#
+# Since Ruby 1.9.2, Time implementation uses a signed 63 bit integer, Bignum or Rational. The integer is a number of nanoseconds since the Epoch which can represent 1823-11-12 to 2116-02-20. When Bignum or Rational is used (before 1823, after 2116, under nanosecond), Time works slower as when integer is used.
 class Time
+	# Converts time into words with a Facebook like lingo ("just now", "an hour ago", etc...).
+	# @return [String] time elapsed in words 
 	def ago
 		TimeMethods.time_ago(self)
 	end
+	# converts time to non-relative human-readable format
+	# @return [String] the time in human-readable format (Not words per-se).
 	def factual
 		TimeMethods.factual_time(self)
 	end
