@@ -3,27 +3,19 @@ Box Puts
 
 Converts time and time intervals to human readable forms.
 
-		
-	┌─────[Hello World]──────────────────────────────────────────────────┐
-	│                   box_puts let you put text in                     │
-	│                              boxes!                                │
-	└────────────────────────────────────────────────────────────────────┘
+	TM = TimeMethods
+	TM.factual_time(Time.now) #=> "Today"
+	TM.time_ago(Time.now-5) #=> "just now"
+	TM.relative_time(20*60) #=> "20 minutes"
 
 
 Usage
 -----
 
-To get started `gem install box_puts`, then:
+To get started `gem install time_methods`, then:
 
-	require 'box_puts'
+	require 'time_methods'
 
-	BoxPuts.show(
-		:title => "Hello World",
-		:align => "center",
-		:lines => ["box_puts let you put text in", "boxes!"]
-	)
-	┌─────[Hello World]──────────────────────────────────────────────────┐
-	│                   box_puts let you put text in                     │
-	│                              boxes!                                │
-	└────────────────────────────────────────────────────────────────────┘
-	#=> nil
+	TimeMethods.factual_time(Time.now) #=> "Today"
+	TimeMethods.time_ago(Time.now-5) #=> "just now"
+	TimeMethods.relative_time(20*60) #=> "20 minutes"
