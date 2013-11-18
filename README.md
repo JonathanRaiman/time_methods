@@ -1,7 +1,7 @@
 Box Puts
 ========
 
-Output text in a framed box, with a title.
+Converts time and time intervals to human readable forms.
 
 		
 	┌─────[Hello World]──────────────────────────────────────────────────┐
