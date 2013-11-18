@@ -4,7 +4,11 @@
 # perform relative time conversions really easily.
 module TimeMethods
 
-	def pluralize(number, text)
+	# Pluralizes a string by adding "s" to the element name when there are 0 or 2+ elements.
+	# @param number [FixNum] number of elements to pluralize
+	# @param text [String] the element being pluralized
+	# @return [String] the pluralized string.
+	def self.pluralize(number, text)
 		return "#{text}s" if number != 1
 		text
 	end
@@ -12,7 +16,7 @@ module TimeMethods
 	# convert time to non-relative human-readable format
 	# @param t [Time] the time to convert
 	# @return [String] the time in human-readable format (Not words per-se).
-	def factual_time(t)
+	def self.factual_time(t)
 		msg = ""
 		if t.day == Time.now.day
 			msg += "Today"
@@ -21,15 +25,16 @@ module TimeMethods
 		else
 			msg += t.strftime('%-d %B %Y')
 		end
-		msg += " "
-		msg += t.hour.to_s+":"+t.min.to_s+":"+t.sec.to_s
+		msg += t.strftime(' %H:%M:%S')
+		# msg += " "
+		# msg += t.hour.to_s+":"+t.min.to_s+":"+t.sec.to_s
 		msg
 	end
 
 	# Converts time from an integer or float amount of seconds to words.
 	# @param diff_seconds [Fixnum, Float] time to convert to words
 	# @return [String] time in words elapsed
-	def relative_time(diff_seconds)
+	def self.relative_time(diff_seconds)
 		delta_t = (diff_seconds.class == Float) ? diff_seconds.to_i : diff_seconds
 		case delta_t
 			when 0 .. 5
@@ -60,7 +65,7 @@ module TimeMethods
 	# Converts time into words with a Facebook like lingo ("just now", "an hour ago", etc...).
 	# @param start_time [Time] time to convert to words
 	# @return [String] time in words elapsed
-	def time_ago(start_time)
+	def self.time_ago(start_time)
 		diff_seconds = Time.now.to_i - start_time.to_i
 		case diff_seconds
 			when 0 .. 59
@@ -86,6 +91,13 @@ module TimeMethods
 		end
 	end
 
-	private :pluralize
+end
 
+class Time
+	def ago
+		TimeMethods.time_ago(self)
+	end
+	def factual
+		TimeMethods.factual_time(self)
+	end
 end
